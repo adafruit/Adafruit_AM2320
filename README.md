@@ -3,7 +3,7 @@
 <img src="https://cdn-shop.adafruit.com/970x728/1947-05.jpg" height="300"/>
 
 This is a library for the Adafruit AM2320 Temperature & Humidity Unified Sensor
-  * https://www.adafruit.com/products/xxxx
+  * https://www.adafruit.com/products/3721
 
 Also supports AM2320 chips (and maybe other compatible chips!)
  
