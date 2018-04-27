@@ -86,8 +86,8 @@ float Adafruit_AM2320::readTemperature() {
   uint16_t t = readRegister16(AM2320_REG_TEMP_H);
   float ft;
   if (t == 0xFFFF) return NAN;
-  // check sign bit - the temperature mSB is signd , bit 0-15 are mignitude
-  if(t >= 32768){
+  // check sign bit - the temperature MSB is signd , bit 0-15 are mignitude
+  if(t & 0x8000){
     ft = -(int16_t)(t&0x7fff);
   }
   else {
