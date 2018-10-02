@@ -1,6 +1,6 @@
 # Adafruit AM2320 Library [![Build Status](https://travis-ci.org/adafruit/Adafruit_AM2320.svg?branch=master)](https://travis-ci.org/adafruit/Adafruit_AM2320)
 
-<img src="https://cdn-shop.adafruit.com/970x728/1947-05.jpg" height="300"/>
+<img src="https://cdn-shop.adafruit.com/970x728/3721-00.jpg" height="300"/>
 
 This is a library for the Adafruit AM2320 Temperature & Humidity Unified Sensor
   * https://www.adafruit.com/products/3721
