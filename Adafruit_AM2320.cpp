@@ -51,7 +51,7 @@
 #include "Adafruit_AM2320.h"
 
   /**************************************************************************/
-  /*! 
+  /*!
       @brief  Instantiates a new AM2320 class
       @param theI2C Optional pointer to a TwoWire object that should be used for I2C communication. Defaults to &Wire.
       @param tempSensorId the id that should be used for the temperature sensor. Defaults to -1
@@ -65,8 +65,8 @@ Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId, int32_t 
 {}
 
 /**************************************************************************/
-/*! 
-    @brief  Setups the hardware
+/*!
+    @brief  Setups the hardware using default SDA and SCL pins
     @return true
 */
 /**************************************************************************/
@@ -77,7 +77,20 @@ bool Adafruit_AM2320::begin() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
+    @brief  Setups the hardware specifying alternate SDA and SCL pins
+    @return true
+*/
+/**************************************************************************/
+
+bool Adafruit_AM2320::begin(int sda, int scl) {
+  _i2caddr = 0x5C;  // fixed addr
+  _i2c->begin(sda,scl);
+  return true;
+}
+
+/**************************************************************************/
+/*!
     @brief  read the temperature from the device
     @return the temperature reading as a floating point value
 */
@@ -97,7 +110,7 @@ float Adafruit_AM2320::readTemperature() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  read the humidity from the device
     @return the humidity reading as a floating point value
 */
@@ -111,7 +124,7 @@ float Adafruit_AM2320::readHumidity() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  read 2 bytes from a hardware register
     @param reg the register to read
     @return the read value as a 2 byte unsigned integer
@@ -132,12 +145,12 @@ uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
   Wire.endTransmission();
 
   delay(2);  // wait 2 ms
-  
+
   // 2 bytes preamble, 2 bytes data, 2 bytes CRC
   Wire.requestFrom(_i2caddr, (uint8_t)6);
   if (Wire.available() != 6)
     return 0xFFFF;
-  
+
   uint8_t buffer[6];
   for (int i=0; i<6; i++) {
     buffer[i] = Wire.read();
@@ -146,7 +159,7 @@ uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
 
   if (buffer[0] != 0x03)   return 0xFFFF; // must be 0x03 modbus reply
   if (buffer[1] != 2)      return 0xFFFF; // must be 2 bytes reply
-  
+
   uint16_t the_crc = buffer[5];
   the_crc <<= 8;
   the_crc |= buffer[4];
@@ -164,7 +177,7 @@ uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  perfor a CRC check to verify data
     @param buffer the pointer to the data to check
     @param nbytes the number of bytes to calculate the CRC over
@@ -189,7 +202,7 @@ uint16_t Adafruit_AM2320::crc16(uint8_t *buffer, uint8_t nbytes) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  set the name of the sensor
     @param sensor a pointer to the sensor
 */
@@ -199,7 +212,7 @@ void Adafruit_AM2320::setName(sensor_t* sensor) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  set minimum delay to a fixed value of 2 seconds
     @param sensor a pointer to the sensor
 */
@@ -209,7 +222,7 @@ void Adafruit_AM2320::setMinDelay(sensor_t* sensor) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  create a temperature sensor instance
     @param parent the pointer to the parent sensor
     @param id the id value for the sensor
@@ -221,7 +234,7 @@ Adafruit_AM2320::Temperature::Temperature(Adafruit_AM2320* parent, int32_t id):
 {}
 
 /**************************************************************************/
-/*! 
+/*!
     @brief read the temperature from the device and populate a sensor_event_t with the value
     @param event a pointer to the event to populate
     @return true
@@ -236,12 +249,12 @@ bool Adafruit_AM2320::Temperature::getEvent(sensors_event_t* event) {
   event->type        = SENSOR_TYPE_AMBIENT_TEMPERATURE;
   event->timestamp   = millis();
   event->temperature = _parent->readTemperature();
-  
+
   return true;
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief populate a sensor_t with data for this sensor
     @param sensor a pointer to the sensor_t to populate
 */
@@ -265,7 +278,7 @@ void Adafruit_AM2320::Temperature::getSensor(sensor_t* sensor) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  create a humidity sensor instance
     @param parent the pointer to the parent sensor
     @param id the id value for the sensor
@@ -277,7 +290,7 @@ Adafruit_AM2320::Humidity::Humidity(Adafruit_AM2320* parent, int32_t id):
 {}
 
 /**************************************************************************/
-/*! 
+/*!
     @brief read the humidity from the device and populate a sensor_event_t with the value
     @param event a pointer to the event to populate
     @return true
@@ -292,12 +305,12 @@ bool Adafruit_AM2320::Humidity::getEvent(sensors_event_t* event) {
   event->type              = SENSOR_TYPE_RELATIVE_HUMIDITY;
   event->timestamp         = millis();
   event->relative_humidity = _parent->readHumidity();
-  
+
   return true;
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief populate a sensor_t with data for this sensor
     @param sensor a pointer to the sensor_t to populate
 */

@@ -3,9 +3,9 @@
  *
  * This is a library for the AM2320 Temperature & Humidity Unified Sensor breakout board
  * ----> https://www.adafruit.com/products/xxxx
- * 
- * Adafruit invests time and resources providing this open source code, 
- * please support Adafruit and open-source hardware by purchasing 
+ *
+ * Adafruit invests time and resources providing this open source code,
+ * please support Adafruit and open-source hardware by purchasing
  * products from Adafruit!
  *
  * Written by Limor Fried for Adafruit Industries.
@@ -42,14 +42,15 @@
 #include <Wire.h>
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  Class that stores state and functions for interacting with AM2320 Temperature & Humidity Unified Sensor
 */
 /**************************************************************************/
 class Adafruit_AM2320 {
 public:
   Adafruit_AM2320(TwoWire *theI2C = &Wire, int32_t tempSensorId=-1, int32_t humiditySensorId=-1);
-  bool begin();
+  bool begin();                  /* Use default SDA and SCL pins */
+  bool begin(int sda, int scl);  /* Declare SDA and SCL pin locations here */
 
   float readTemperature();
   float readHumidity();
@@ -57,7 +58,7 @@ public:
   uint16_t crc16(uint8_t *buffer, uint8_t nbytes);
 
   /**************************************************************************/
-  /*! 
+  /*!
       @brief  temperature sensor class
   */
   /**************************************************************************/
@@ -73,7 +74,7 @@ public:
   };
 
   /**************************************************************************/
-  /*! 
+  /*!
       @brief  humidity sensor class
   */
   /**************************************************************************/
@@ -90,7 +91,7 @@ public:
   };
 
   /**************************************************************************/
-  /*! 
+  /*!
       @brief  get the temperature sensor object belonging to this class
       @return the temperature sensor object
   */
@@ -100,7 +101,7 @@ public:
   }
 
   /**************************************************************************/
-  /*! 
+  /*!
       @brief  get the humidity sensor object belonging to this class
       @return the humidity sensor object
   */
