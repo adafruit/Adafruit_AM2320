@@ -1,4 +1,4 @@
-# Adafruit AM2320 Library [![Build Status](https://travis-ci.org/adafruit/Adafruit_AM2320.svg?branch=master)](https://travis-ci.org/adafruit/Adafruit_AM2320)
+# Adafruit AM2320 Library [![Build Status](https://travis-ci.com/adafruit/Adafruit_AM2320.svg?branch=master)](https://travis-ci.com/adafruit/Adafruit_AM2320)
 
 <img src="https://cdn-shop.adafruit.com/970x728/3721-00.jpg" height="300"/>
 
