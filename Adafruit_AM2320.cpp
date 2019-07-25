@@ -119,28 +119,28 @@ float Adafruit_AM2320::readHumidity() {
 /**************************************************************************/
 uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
   // wake up
-  Wire.beginTransmission(_i2caddr);
-  Wire.write(0x00);
-  Wire.endTransmission();
+  _i2c->beginTransmission(_i2caddr);
+  _i2c->write(0x00);
+  _i2c->endTransmission();
   delay(10); // wait 10 ms
 
   // send a command to read register
-  Wire.beginTransmission(_i2caddr);
-  Wire.write(AM2320_CMD_READREG);
-  Wire.write(reg);
-  Wire.write(2);  // 2 bytes
-  Wire.endTransmission();
+  _i2c->beginTransmission(_i2caddr);
+  _i2c->write(AM2320_CMD_READREG);
+  _i2c->write(reg);
+  _i2c->write(2);  // 2 bytes
+  _i2c->endTransmission();
 
   delay(2);  // wait 2 ms
   
   // 2 bytes preamble, 2 bytes data, 2 bytes CRC
-  Wire.requestFrom(_i2caddr, (uint8_t)6);
-  if (Wire.available() != 6)
+  _i2c->requestFrom(_i2caddr, (uint8_t)6);
+  if (_i2c->available() != 6)
     return 0xFFFF;
   
   uint8_t buffer[6];
   for (int i=0; i<6; i++) {
-    buffer[i] = Wire.read();
+    buffer[i] = _i2c->read();
     //Serial.print("byte #"); Serial.print(i); Serial.print(" = 0x"); Serial.println(buffer[i], HEX);
   }
 
