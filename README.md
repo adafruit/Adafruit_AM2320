@@ -1,4 +1,4 @@
-# Adafruit AM2320 Library [![Build Status](https://travis-ci.com/adafruit/Adafruit_AM2320.svg?branch=master)](https://travis-ci.com/adafruit/Adafruit_AM2320)
++# Adafruit_AM2320 [![Build Status](https://github.com/adafruit/Adafruit_AM2320/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_AM2320/actions)
 
 <img src="https://cdn-shop.adafruit.com/970x728/3721-00.jpg" height="300"/>
 
