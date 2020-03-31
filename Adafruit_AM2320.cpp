@@ -124,7 +124,7 @@ float Adafruit_AM2320::readHumidity() {
 uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
   // wake up
   _i2c->beginTransmission(_i2caddr);
-  _i2c->write(0x00);
+  _i2c->write((uint8_t)0x00);
   _i2c->endTransmission();
   delay(10); // wait 10 ms
 
