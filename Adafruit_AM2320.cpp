@@ -64,8 +64,10 @@
 /**************************************************************************/
 Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
                                  int32_t humiditySensorId)
-    : _temp(this, tempSensorId), _humidity(this, humiditySensorId),
-      _i2c(theI2C) {}
+    : _temp(this, tempSensorId), _humidity(this, humiditySensorId) {
+  if (i2c_dev) delete i2c_dev;
+  i2c_dev = new Adafruit_I2CDevice(0x5C, theI2C);  // fixed addr
+}
 
 /**************************************************************************/
 /*!
@@ -74,9 +76,7 @@ Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
 */
 /**************************************************************************/
 bool Adafruit_AM2320::begin() {
-  _i2caddr = 0x5C; // fixed addr
-  _i2c->begin();
-  return true;
+  return i2c_dev->begin();
 }
 
 /**************************************************************************/
@@ -122,32 +122,21 @@ float Adafruit_AM2320::readHumidity() {
 */
 /**************************************************************************/
 uint16_t Adafruit_AM2320::readRegister16(uint8_t reg) {
+  uint8_t buffer[6] = {0, 0, 0, 0, 0, 0};
+
   // wake up
-  _i2c->beginTransmission(_i2caddr);
-  _i2c->write((uint8_t)0x00);
-  _i2c->endTransmission();
+  i2c_dev->write(buffer, 1);
   delay(10); // wait 10 ms
 
   // send a command to read register
-  _i2c->beginTransmission(_i2caddr);
-  _i2c->write(AM2320_CMD_READREG);
-  _i2c->write(reg);
-  _i2c->write(2); // 2 bytes
-  _i2c->endTransmission();
-
+  buffer[0] = AM2320_CMD_READREG;
+  buffer[1] = reg;
+  buffer[2] = 2; // 2 bytes
+  i2c_dev->write(buffer, 3);
   delay(2); // wait 2 ms
 
   // 2 bytes preamble, 2 bytes data, 2 bytes CRC
-  _i2c->requestFrom(_i2caddr, (uint8_t)6);
-  if (_i2c->available() != 6)
-    return 0xFFFF;
-
-  uint8_t buffer[6];
-  for (int i = 0; i < 6; i++) {
-    buffer[i] = _i2c->read();
-    // Serial.print("byte #"); Serial.print(i); Serial.print(" = 0x");
-    // Serial.println(buffer[i], HEX);
-  }
+  i2c_dev->read(buffer, 6);
 
   if (buffer[0] != 0x03)
     return 0xFFFF; // must be 0x03 modbus reply
