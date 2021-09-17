@@ -65,8 +65,9 @@
 Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
                                  int32_t humiditySensorId)
     : _temp(this, tempSensorId), _humidity(this, humiditySensorId) {
-  if (i2c_dev) delete i2c_dev;
-  i2c_dev = new Adafruit_I2CDevice(0x5C, theI2C);  // fixed addr
+  if (i2c_dev)
+    delete i2c_dev;
+  i2c_dev = new Adafruit_I2CDevice(0x5C, theI2C); // fixed addr
 }
 
 /**************************************************************************/
@@ -75,9 +76,7 @@ Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
     @return true
 */
 /**************************************************************************/
-bool Adafruit_AM2320::begin() {
-  return i2c_dev->begin();
-}
+bool Adafruit_AM2320::begin() { return i2c_dev->begin(); }
 
 /**************************************************************************/
 /*!
