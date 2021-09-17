@@ -38,8 +38,8 @@
 #define AM2320_CMD_READREG 0x03 ///< read register command
 #define AM2320_REG_TEMP_H 0x02  ///< temp register address
 #define AM2320_REG_HUM_H 0x00   ///< humidity register address
+#include <Adafruit_I2CDevice.h>
 #include <Adafruit_Sensor.h>
-#include <Wire.h>
 
 /**************************************************************************/
 /*!
@@ -107,11 +107,9 @@ public:
   Humidity humidity() { return _humidity; }
 
 private:
-  Temperature _temp;  ///< the temperature sensor object
-  Humidity _humidity; ///< the humidity sensor object
-  TwoWire *_i2c;      ///< the TwoWire object used for I2C connumication
-  uint8_t _i2caddr;   ///< the i2c address the device can be found on
-
+  Temperature _temp;                  ///< the temperature sensor object
+  Humidity _humidity;                 ///< the humidity sensor object
+  Adafruit_I2CDevice *i2c_dev = NULL; ///< Pointer to I2C bus interface
   void setName(sensor_t *sensor);
   void setMinDelay(sensor_t *sensor);
 };
