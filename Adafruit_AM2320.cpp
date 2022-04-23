@@ -76,7 +76,7 @@ Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
     @return true
 */
 /**************************************************************************/
-bool Adafruit_AM2320::begin() { return i2c_dev->begin(); }
+bool Adafruit_AM2320::begin() { return i2c_dev->begin(false); }
 
 /**************************************************************************/
 /*!
