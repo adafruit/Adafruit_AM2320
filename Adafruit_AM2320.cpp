@@ -81,8 +81,8 @@ bool Adafruit_AM2320::begin() {
     return false;
   
   // sensor presence check
-  i2c_dev->detected(); // wake up
-  delay(10); // wait 10 ms
+  i2c_dev->detected();        // wake up
+  delay(10);                  // wait 10 ms
   return i2c_dev->detected(); // check if ACK
 }
 
