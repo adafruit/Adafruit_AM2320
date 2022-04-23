@@ -79,7 +79,6 @@ Adafruit_AM2320::Adafruit_AM2320(TwoWire *theI2C, int32_t tempSensorId,
 bool Adafruit_AM2320::begin() {
   if (!i2c_dev->begin(false))
     return false;
-  
   // sensor presence check
   i2c_dev->detected();        // wake up
   delay(10);                  // wait 10 ms
