@@ -157,10 +157,8 @@ uint32_t Adafruit_AM2320::readRegister32(uint8_t reg) {
     return 0xFFFFFFFF;
 
   // All good!
-  uint32_t ret = uint32_t(buffer[2]) << 24 |
-                 uint32_t(buffer[3]) << 16 |
-                 uint32_t(buffer[4]) << 8 |
-                 uint32_t(buffer[5]);
+  uint32_t ret = uint32_t(buffer[2]) << 24 | uint32_t(buffer[3]) << 16 |
+                 uint32_t(buffer[4]) << 8 | uint32_t(buffer[5]);
 
   return ret;
 }
