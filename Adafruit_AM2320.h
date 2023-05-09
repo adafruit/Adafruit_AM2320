@@ -55,7 +55,7 @@ public:
 
   float readTemperature();
   float readHumidity();
-  uint16_t readRegister16(uint8_t reg);
+  uint32_t readRegister32(uint8_t reg);
   uint16_t crc16(uint8_t *buffer, uint8_t nbytes);
 
   /**************************************************************************/
