@@ -95,9 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a42af41711759632855940cf39bcb98b9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___a_m2320.html#a42af41711759632855940cf39bcb98b9">readHumidity</a> ()</td></tr>
 <tr class="memdesc:a42af41711759632855940cf39bcb98b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the humidity from the device  <a href="#a42af41711759632855940cf39bcb98b9">More...</a><br /></td></tr>
 <tr class="separator:a42af41711759632855940cf39bcb98b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57652103942495e00a3b385e221d3f47"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___a_m2320.html#a57652103942495e00a3b385e221d3f47">readRegister16</a> (uint8_t reg)</td></tr>
-<tr class="memdesc:a57652103942495e00a3b385e221d3f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">read 2 bytes from a hardware register  <a href="#a57652103942495e00a3b385e221d3f47">More...</a><br /></td></tr>
-<tr class="separator:a57652103942495e00a3b385e221d3f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c0f51afa2ebc2daf2f8679bf1df103"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___a_m2320.html#aa8c0f51afa2ebc2daf2f8679bf1df103">readRegister32</a> (uint8_t reg)</td></tr>
+<tr class="memdesc:aa8c0f51afa2ebc2daf2f8679bf1df103"><td class="mdescLeft">&#160;</td><td class="mdescRight">read 4 bytes from a hardware register  <a href="#aa8c0f51afa2ebc2daf2f8679bf1df103">More...</a><br /></td></tr>
+<tr class="separator:aa8c0f51afa2ebc2daf2f8679bf1df103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d044a24f928b185ed0d761cab229c27"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___a_m2320.html#a4d044a24f928b185ed0d761cab229c27">crc16</a> (uint8_t *buffer, uint8_t nbytes)</td></tr>
 <tr class="memdesc:a4d044a24f928b185ed0d761cab229c27"><td class="mdescLeft">&#160;</td><td class="mdescRight">perfor a CRC check to verify data  <a href="#a4d044a24f928b185ed0d761cab229c27">More...</a><br /></td></tr>
 <tr class="separator:a4d044a24f928b185ed0d761cab229c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,14 +216,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a57652103942495e00a3b385e221d3f47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57652103942495e00a3b385e221d3f47">&#9670;&nbsp;</a></span>readRegister16()</h2>
+<a id="aa8c0f51afa2ebc2daf2f8679bf1df103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8c0f51afa2ebc2daf2f8679bf1df103">&#9670;&nbsp;</a></span>readRegister32()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t Adafruit_AM2320::readRegister16 </td>
+          <td class="memname">uint32_t Adafruit_AM2320::readRegister32 </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>reg</em></td><td>)</td>
@@ -232,14 +232,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>read 2 bytes from a hardware register </p>
+<p>read 4 bytes from a hardware register </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">reg</td><td>the register to read </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the read value as a 2 byte unsigned integer </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the read value as a 4 byte unsigned integer </dd></dl>
 
 </div>
 </div>
