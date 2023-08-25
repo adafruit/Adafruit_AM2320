@@ -128,17 +128,32 @@ float Adafruit_AM2320::readHumidity() {
 /**************************************************************************/
 uint32_t Adafruit_AM2320::readRegister32(uint8_t reg) {
   uint8_t buffer[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+  bool written = false;
 
   // wake up
-  i2c_dev->write(buffer, 1);
-  delay(10); // wait 10 ms
+  for (int i = 0; i < 3; i++) {
+    written = i2c_dev->write(buffer, 1);
+    if (written)
+      break;
+    delay(100); // 50-70 lead to 2 errors each time
+  }
+  if (!written)
+    return 0xFFFFFFFF; // no ACK!
+  delay(10);           // wait 10 ms
 
   // send a command to read register
   buffer[0] = AM2320_CMD_READREG;
   buffer[1] = reg;
   buffer[2] = 4; // 4 bytes
-  i2c_dev->write(buffer, 3);
-  delay(2); // wait 2 ms
+  for (int i = 0; i < 3; i++) {
+    written = i2c_dev->write(buffer, 3);
+    if (written)
+      break;
+    delay(5);
+  }
+  if (!written)
+    return 0xFFFFFFFF; // read not acknowledged!
+  delay(2);            // wait 2 ms
 
   // 2 bytes preamble, 4 bytes data, 2 bytes CRC
   i2c_dev->read(buffer, 8);
